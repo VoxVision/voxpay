@@ -42,7 +42,7 @@ func (k *Kassa) PaymentURL(amount, orderID int) string {
 
 func (k *Kassa) SignatureValue(amount, orderID int) string {
 	//$mrh_login:$out_summ:$inv_id:$mrh_pass1
-	s := []string{k.MrchLogin, strconv.Itoa(amount) + ".00", strconv.Itoa(orderID), k.MrchPass1()}
+	s := []string{k.mrchLogin, strconv.Itoa(amount) + ".00", strconv.Itoa(orderID), k.MrchPass1()}
 	h := md5.New()
 	io.WriteString(h, strings.Join(s, delim))
 	return fmt.Sprintf("%x", h.Sum(nil))
